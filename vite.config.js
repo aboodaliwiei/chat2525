@@ -1,8 +1,15 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+
+// نحاول استيراد plugin-react إذا كانت متوفرة
+let reactPlugin = []
+try {
+  reactPlugin = [require('@vitejs/plugin-react')()]
+} catch (e) {
+  console.warn('⚠️ @vitejs/plugin-react غير مثبت. يمكنك تثبيته بـ: npm install @vitejs/plugin-react')
+}
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: reactPlugin,
   server: {
     host: '0.0.0.0',
   },
